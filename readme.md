@@ -9,4 +9,13 @@
     <a href="https://codeclimate.com/github/ZapsterStudios/Ally-JS-SDK">
         <img src="https://codeclimate.com/github/ZapsterStudios/Ally-JS-SDK/badges/gpa.svg">
     </a>
+    <a href="https://gemnasium.com/github.com/ZapsterStudios/Ally-JS-SDK">
+        <img src="https://gemnasium.com/badges/github.com/ZapsterStudios/Ally-JS-SDK.svg" alt="Dependency Status">
+    </a>
 </p>
+
+## Introduction
+WIP
+
+## License
+Laravel Ally - JavaScript SDK is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
