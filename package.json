@@ -18,16 +18,5 @@
     "coveralls": "^2.13.1",
     "jest": "^20.0.4",
     "webpack": "^3.4.1"
-  },
-  "jest": {
-    "transform": {
-      ".*": "<rootDir>/node_modules/babel-jest"
-    },
-    "moduleFileExtensions": [
-      "js"
-    ],
-    "collectCoverageFrom": [
-      "src/*.js"
-    ]
   }
 }
