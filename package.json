@@ -7,13 +7,27 @@
     "production": "NODE_ENV=production webpack",
     "watch": "NODE_ENV=development webpack --watch",
     "dev": "NODE_ENV=development webpack",
-    "test": "jest"
+    "test": "jest",
+    "test-coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "axios": "^0.16.2"
   },
   "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "coveralls": "^2.13.1",
     "jest": "^20.0.4",
     "webpack": "^3.4.1"
+  },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "collectCoverageFrom": [
+      "src/*.js"
+    ]
   }
 }
