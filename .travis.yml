@@ -1,0 +1,14 @@
+language: node_js
+
+php: 7
+
+notifications:
+  email: false
+
+cache:
+  directories:
+    - node_modules
+
+before_script: npm update
+
+script: npm test
