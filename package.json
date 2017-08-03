@@ -1,0 +1,19 @@
+{
+  "name": "AllySDK",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run production && npm run dev",
+    "production": "NODE_ENV=production webpack",
+    "watch": "NODE_ENV=development webpack --watch",
+    "dev": "NODE_ENV=development webpack",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.16.2"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4",
+    "webpack": "^3.4.1"
+  }
+}
