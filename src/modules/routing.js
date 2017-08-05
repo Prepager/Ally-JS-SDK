@@ -1,10 +1,12 @@
+const map = require('../map.json.js');
+
 module.exports = {
     /**
      * Store the REST API routes map.
      *
      * @var {object}
      */
-    map: JSON.parse(require('../map.json.js')),
+    map: JSON.parse(map),
 
     /**
      * Store the base REST API URL.
@@ -22,7 +24,6 @@ module.exports = {
     route: function (route) {
         if (! this.map[route]) {
             throw 'Could not find route in map with name "'+route+'".';
-            return false;
         }
     
         return this.baseURL + '/' + this.map[route];
