@@ -17,11 +17,6 @@ Ally.routing = require('./modules/routing');
 Ally.auth = require('./actions/auth');
 
 /**
- * Require the package helpers.
- */
-require('./helpers');
-
-/**
  * Export the Ally wrapper
  *
  * @var {object}

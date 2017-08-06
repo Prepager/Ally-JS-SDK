@@ -26,6 +26,22 @@ test('invalid login attempt does not change data', async () => {
 });
 
 /** @test */
+test('valid login attempt with failed user retrival does not change data', async () => {
+    axios.reset();
+    axios.mock('login').reply(...factories.login());
+    axios.mock('account.show').reply(404);
+
+    expect.assertions(4);
+    await auth.login('registered@example.com', 'secret').catch(error => {
+        expect(auth.user()).toBeNull();
+        expect(auth.token()).toBeNull();
+        expect(auth.expiry()).toBeNull();
+
+        expect(auth.check()).toBe(false);
+    });
+});
+
+/** @test */
 test('valid login attempt does change data', async () => {
     axios.reset();
     axios.mock('login').reply(...factories.login());

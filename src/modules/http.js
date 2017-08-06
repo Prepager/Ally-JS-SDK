@@ -74,7 +74,7 @@ module.exports = {
      * @return {promise}
      */
     put(url, payload, config) {
-        return axios.get(url, payload, config);
+        return axios.put(url, payload, config);
     },
 
     /**

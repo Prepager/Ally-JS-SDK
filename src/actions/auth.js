@@ -65,9 +65,9 @@ module.exports = {
                 'email': email,
                 'password': password
             }).then(response => {
-                this.saveLogin(response);
-
                 this.account().then(user => {
+                    this.saveLogin(response);
+
                     resolve(response);
                 }).catch(error => reject(error));
             }).catch(error => reject(error));
@@ -92,7 +92,7 @@ module.exports = {
      * @return {void}
      */
     saveLogin(response) {
-        if (! response.status == 200) return;
+        if (response.status !== 200) return;
 
         let expiry = new Date();
         expiry.setTime(expiry.getTime() + response.data.expires_in * 1000);
