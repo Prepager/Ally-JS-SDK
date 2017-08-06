@@ -1,6 +1,36 @@
 const axios = require('axios');
+const routing = require('./routing');
 
 module.exports = {
+    /**
+     * Set axios authorization bearer token.
+     *
+     * @param  {string|null}  bearer
+     * @return {void}
+     */
+    setToken(bearer) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + bearer;
+    },
+
+    /**
+     * Make a http request base on named route.
+     *
+     * @param  {string}  route
+     * @param  {array|null}  payload
+     * @param  {object|null}  config
+     * @return {promise}
+     */
+    request(route, payload = null, config = null) {
+        let url = routing.route(route);
+        let method = routing.method(route).toLowerCase();
+
+        if (['post', 'put', 'patch'].includes(method)) {
+            return this[method](url, payload, config);
+        }
+
+        return this[method](url, config);
+    },
+
     /**
      * Make a http GET request.
      *
@@ -8,8 +38,8 @@ module.exports = {
      * @param  {object|null}  config
      * @return {promise}
      */
-    get: function (url, config = null) {
-        axios.get(url, config);
+    get(url, config = null) {
+        return axios.get(url, config);
     },
 
     /**
@@ -19,8 +49,8 @@ module.exports = {
      * @param  {object|null}  config
      * @return {promise}
      */
-    delete: function (url, config = null) {
-        axios.delete(url, config);
+    delete(url, config = null) {
+        return axios.delete(url, config);
     },
 
     /**
@@ -31,8 +61,8 @@ module.exports = {
      * @param  {object|null}  config
      * @return {promise}
      */
-    post: function (url, payload, config = null) {
-        axios.post(url, payload, config);
+    post(url, payload, config = null) {
+        return axios.post(url, payload, config);
     },
 
     /**
@@ -43,8 +73,8 @@ module.exports = {
      * @param  {object|null}  config
      * @return {promise}
      */
-    put: function (url, payload, config) {
-        axios.get(url, payload, config);
+    put(url, payload, config) {
+        return axios.get(url, payload, config);
     },
 
     /**
@@ -55,7 +85,7 @@ module.exports = {
      * @param  {object|null}  config
      * @return {promise}
      */
-    patch: function (url, payload, config) {
-        axios.patch(url, payload, config);
+    patch(url, payload, config) {
+        return axios.patch(url, payload, config);
     }
 };

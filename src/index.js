@@ -12,6 +12,11 @@ Ally.http = require('./modules/http');
 Ally.routing = require('./modules/routing');
 
 /**
+ * Require the package actions.
+ */
+Ally.auth = require('./actions/auth');
+
+/**
  * Require the package helpers.
  */
 require('./helpers');

@@ -16,16 +16,43 @@ module.exports = {
     baseURL: '',
 
     /**
-     * Return the url for a named route.
+     * Return the method for a named route.
      *
      * @param  {string} route
-     * @return {string|bool}
+     * @return {string}
      */
-    route: function (route) {
+    method(route) {
         if (! this.map[route]) {
             throw 'Could not find route in map with name "'+route+'".';
         }
     
-        return this.baseURL + '/' + this.map[route];
+        return this.map[route].method;
+    },
+
+    /**
+     * Return the url for a named route.
+     *
+     * @param  {string} route
+     * @return {string}
+     */
+    route(route) {
+        if (! this.map[route]) {
+            throw 'Could not find route in map with name "'+route+'".';
+        }
+
+        return this.baseURL + '/' + this.map[route].url;
+    },
+
+    /**
+     * Return the url and method for a named route.
+     *
+     * @param  {string}  route
+     * @return {array}
+     */
+    entry(route) {
+        return {
+            method: this.method(route), 
+            url: this.route(route)
+        };
     }
 };
