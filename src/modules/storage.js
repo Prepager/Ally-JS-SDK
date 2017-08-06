@@ -20,13 +20,7 @@ module.exports = {
      * @return {mixed}
      */
     getStorage(name) {
-        let item = window.localStorage.getItem(name);
-
-        try {
-            return JSON.parse(item);
-        } catch(e) {
-            return item;
-        }
+        return JSON.parse(window.localStorage.getItem(name));
     },
 
     /**
@@ -37,11 +31,7 @@ module.exports = {
      * @return {null}
      */
     setStorage(name, data) {
-        try {
-            data = JSON.stringify(data);
-        } catch(e) {}
-
-        return window.localStorage.setItem(name, data);
+        return window.localStorage.setItem(name, JSON.stringify(data));
     },
 
     /**
