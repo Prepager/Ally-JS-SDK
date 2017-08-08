@@ -58,6 +58,32 @@ test('valid login attempt does change data', async () => {
 });
 
 /** @test */
+test('invalid refesh attempt does not change data', async () => {
+    axios.reset();
+    axios.mock('refresh').reply(404);
+
+    expect.assertions(2);
+    auth.reset();
+    await auth.refresh('some-refresh-token').catch(error => {
+        expect(auth.token()).toBeNull();
+        expect(auth.expiry()).toBeNull();
+    });
+});
+
+/** @test */
+test('valid refresh attempt does change data', async () => {
+    axios.reset();
+    axios.mock('refresh').reply(...factories.login());
+
+    expect.assertions(2);
+    auth.reset();
+    await auth.refresh('some-refresh-token').then(response => {
+        expect(auth.token()).toEqual(factories.login()[1]);
+        expect(auth.expiry()).not.toBeNull();
+    });
+});
+
+/** @test */
 test('valid logout request does reset data', async () => {
     axios.reset();
     axios.mock('logout').reply(200, 'Token revoked.');

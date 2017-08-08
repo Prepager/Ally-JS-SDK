@@ -22,5 +22,10 @@
     "jest": "^20.0.4",
     "mock-local-storage": "^1.0.4",
     "webpack": "^3.4.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
   }
 }

@@ -75,6 +75,20 @@ module.exports = {
     },
 
     /**
+     * Save the login information.
+     *
+     * @param  {object}  response
+     * @return {void}
+     */
+    saveLogin(response) {
+        let expiry = new Date();
+        expiry.setTime(expiry.getTime() + response.data.expires_in * 1000);
+
+        this.token(response.data);
+        this.expiry(expiry);
+    },
+
+    /**
      * Retrieve the authenticated account.
      *
      * @return {promise}
@@ -86,28 +100,25 @@ module.exports = {
     },
 
     /**
-     * Save the login information.
-     *
-     * @param  {object}  response
-     * @return {void}
-     */
-    saveLogin(response) {
-        if (response.status !== 200) return;
-
-        let expiry = new Date();
-        expiry.setTime(expiry.getTime() + response.data.expires_in * 1000);
-
-        this.token(response.data);
-        this.expiry(expiry);
-    },
-
-    /**
      * Refresh a users oauth token.
      *
      * @return {promise}
      */
     refresh() {
-        //
+        return http.request('refresh').then(response => {
+            this.saveLogin(response);
+        });
+    },
+
+    /**
+     * Reset the auth information.
+     *
+     * @return {void}
+     */
+    reset() {
+        this.user(false);
+        this.token(false);
+        this.expiry(false);
     },
 
     /**
@@ -117,9 +128,7 @@ module.exports = {
      */
     logout() {
         return http.request('logout').then(response => {
-            this.user(false);
-            this.token(false);
-            this.expiry(false);
+            this.reset();
         });
     }
 };
