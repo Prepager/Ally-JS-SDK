@@ -22,12 +22,12 @@ module.exports = {
     /**
      * Create a new axios mock.
      *
-     * @param  {string}  method
      * @param  {string}  route
+     * @param  {object}  params
      * @return {object}
      */
-    mock(route) {
-        let entry = routing.entry(route);
+    mock(route, params = {}) {
+        let entry = routing.entry(route, params);
 
         return this.instance[this.toMethodOn(entry.method)](entry.url);
     },

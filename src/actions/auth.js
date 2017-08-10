@@ -1,5 +1,4 @@
 const http = require('../modules/http');
-const routing = require('../modules/routing');
 const storage = require('../modules/storage');
 
 module.exports = {
@@ -129,6 +128,47 @@ module.exports = {
     logout() {
         return http.request('logout').then(response => {
             this.reset();
+        });
+    },
+
+    /**
+     * Start user impersonation.
+     *
+     * @param  {integer}  userID
+     * @return {promise}
+     */
+    startImpersonation(userID) {
+        return new Promise((resolve, reject) => {
+            http.request('dashboard.users.impersonation.store', {
+                'user': userID
+            }).then(response => {
+                this.impersonating({
+                    'user': this.user(),
+                    'token': this.token(),
+                    'expiry': this.expiry()
+                });
+
+                this.account().then(user => {
+                    this.saveLogin(response);
+
+                    resolve(response);
+                }).catch(error => reject(error));
+            }).catch(error => reject(error));
+        });
+    },
+
+    /**
+     * Stop user impersonation.
+     *
+     * @return {promise}
+     */
+    stopImpersonation() {
+        return http.request('dashboard.users.impersonation.destroy').then(response => {
+            let data = this.impersonating();
+
+            this.user(data.user);
+            this.token(data.token);
+            this.expiry(data.expiry);
         });
     }
 };

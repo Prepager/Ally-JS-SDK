@@ -16,12 +16,13 @@ module.exports = {
      * Make a http request base on named route.
      *
      * @param  {string}  route
+     * @param  {array}  params
      * @param  {array|null}  payload
      * @param  {object|null}  config
      * @return {promise}
      */
-    request(route, payload = null, config = null) {
-        let url = routing.route(route);
+    request(route, params = {}, payload = null, config = null) {
+        let url = routing.route(route, params);
         let method = routing.method(route).toLowerCase();
 
         if (['post', 'put', 'patch'].includes(method)) {

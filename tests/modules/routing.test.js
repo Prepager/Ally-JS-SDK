@@ -23,3 +23,28 @@ test('valid route with base url returns full url', () => {
 
     expect(routing.route('app')).toBe('https://example.com/app');
 });
+
+/** @test */
+test('route with passed parameters are replaced', () => {
+    routing.baseURL = '';
+    routing.map['test.route'] = {
+        method: 'GET',
+        url: 'test-route/{some-id-1}/{some-id-2}/{optional-id?}'
+    };
+
+    expect(routing.route('test.route', {
+        'some-id-1': 1,
+        'some-id-2': 2
+    })).toBe('/test-route/1/2');
+});
+
+/** @test */
+test('route without required parameters throw error', () => {
+    routing.baseURL = '';
+    routing.map['test.route'] = {
+        method: 'GET',
+        url: 'test-route/{some-id-1}/{some-id-2}/{optional-id?}'
+    };
+
+    expect(() => routing.route('test.route')).toThrow();
+});

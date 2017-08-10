@@ -14,17 +14,16 @@ module.exports = {
     /**
      * Return a user response.
      *
-     * @param  {bool}  verified
-     * @param  {bool}  team
+     * @param  {integer}  userID
      * @return {array}
      */
-    user: function (verified = false, team = true) {
-        return [200, Object.assign({
-            id: 1,
+    user: function (userID = 1) {
+        return [200, {
+            id: userID,
             team_id: 1,
             name: 'Registered',
             email: 'registered@example.com',
-            email_verified: verified,
+            email_verified: 1,
             country: 'DK',
             avatar: 'https://www.gravatar.com/avatar/some-user-hash?d=identicon&s=150',
             suspended_reason: null,
@@ -32,9 +31,7 @@ module.exports = {
             suspended_to: null,
             created_at: '2017-07-26 21:00:38',
             updated_at: '2017-07-26 21:21:48'
-        }, team ? {
-            team: this.team(1)[1]
-        } : {})];
+        }];
     },
 
     /**

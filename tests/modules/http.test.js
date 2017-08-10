@@ -64,12 +64,3 @@ test('can set auth header', async () => {
         expect(bearer).toBe('Bearer valid-test-token');
     });
 });
-
-/** @test */
-test('can use request shortcut', async () => {
-    /*axios.instance.onPatch('test-patch-route').reply(200, 'PATCH');
-
-    await http.patch('test-patch-route').then(response => {
-        expect(response.data).toBe('PATCH');
-    });*/
-});
